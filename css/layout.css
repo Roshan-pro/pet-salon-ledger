@@ -1,0 +1,72 @@
+/**
+ * layout.css
+ * ---------------------------------------------------------------------
+ * Page-level structure: header, intro strip, filter controls, tabs, and
+ * the two-column ledger/quote layout. Component-level styling (cards,
+ * buttons, forms) lives in components.css, not here.
+ * ---------------------------------------------------------------------
+ */
+
+.site-header {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border-bottom: 4px solid var(--color-brass);
+}
+.header-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: var(--space-2); padding-bottom: var(--space-2); gap: var(--space-2); flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: var(--space-2); }
+.brand-name { font-family: var(--font-display); font-size: 1.4rem; margin: 0; letter-spacing: 0.02em; }
+.brand-sub { margin: 0; font-size: 0.8rem; color: var(--color-taupe); }
+.header-status { display: flex; align-items: center; gap: var(--space-1); font-size: 0.85rem; color: var(--color-taupe); }
+
+.intro { padding: var(--space-5) 0 var(--space-3); max-width: 640px; }
+.eyebrow {
+  font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--color-brass); margin-bottom: var(--space-1);
+}
+.intro h1 { font-size: 2rem; }
+.intro-copy { color: var(--color-ink-soft); }
+
+.controls {
+  display: flex; flex-wrap: wrap; gap: var(--space-3);
+  padding: var(--space-2) 0 var(--space-3);
+  border-bottom: 1px solid var(--color-line);
+}
+.control-block { display: flex; flex-direction: column; gap: 6px; }
+.search-block { flex: 1 1 260px; }
+.control-label { font-size: 0.8rem; font-weight: 600; color: var(--color-ink-soft); }
+.hint { font-size: 0.75rem; color: var(--color-taupe); }
+
+.tabs {
+  display: flex; gap: var(--space-1); flex-wrap: wrap;
+  padding: var(--space-2) 0; border-bottom: 1px solid var(--color-line);
+}
+
+.ledger-layout {
+  display: grid; grid-template-columns: 1fr 320px; gap: var(--space-4);
+  padding: var(--space-4) 0;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .ledger-layout { grid-template-columns: 1fr; }
+}
+
+.services-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-3);
+}
+
+.inquiry { padding: var(--space-4) 0 var(--space-6); border-top: 1px solid var(--color-line); }
+.form-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+@media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } }
+.field-wide { grid-column: 1 / -1; }
+
+.site-footer {
+  border-top: 1px solid var(--color-line);
+  padding: var(--space-3) 0; color: var(--color-taupe); font-size: 0.8rem;
+}

@@ -1,0 +1,49 @@
+/**
+ * base.css
+ * ---------------------------------------------------------------------
+ * Reset, base typography, and cross-cutting accessibility rules
+ * (focus rings, reduced motion, screen-reader-only utility, skip link).
+ * ---------------------------------------------------------------------
+ */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; margin: 0 0 var(--space-2); color: var(--color-ink); }
+p { margin: 0 0 var(--space-2); }
+button, input, select, textarea { font-family: inherit; font-size: 1rem; }
+ul { list-style: none; margin: 0; padding: 0; }
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-3); }
+
+/* Visible keyboard focus everywhere, always */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute; left: -999px; top: 0;
+  background: var(--color-ink); color: var(--color-paper);
+  padding: var(--space-1) var(--space-2); z-index: 100;
+}
+.skip-link:focus { left: var(--space-2); top: var(--space-2); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
