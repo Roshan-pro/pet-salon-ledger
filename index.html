@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Gilded Paw — Service &amp; Pricing Ledger</title>
+  <meta name="description" content="Digital pricing ledger for The Gilded Paw luxury pet grooming salon floor staff." />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/states.css" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to pricing ledger</a>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header">
+    <div class="wrap header-row">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">GP</span>
+        <div class="brand-text">
+          <p class="brand-name">The Gilded Paw</p>
+          <p class="brand-sub">Grooming Salon &amp; Spa — Staff Pricing Ledger</p>
+        </div>
+      </div>
+      <div class="header-status" role="status" aria-live="polite">
+        <span class="status-dot" data-state="online" aria-hidden="true"></span>
+        <span class="status-text">Ledger synced</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="wrap">
+
+    <!-- ===================== INTRO ===================== -->
+    <section class="intro" aria-labelledby="intro-heading">
+      <p class="eyebrow">For floor staff use</p>
+      <h1 id="intro-heading">Quote a service in seconds, not in stacks of paper.</h1>
+      <p class="intro-copy">Pick a pet size, browse services by category, and build a client's quote below. Everything here reflects today's published rates.</p>
+    </section>
+
+    <!-- ===================== CONTROLS ===================== -->
+    <section class="controls" aria-label="Filter and search the service ledger">
+      <div class="control-block">
+        <label for="pet-size" class="control-label">Pet size (applies to dog services)</label>
+        <select id="pet-size" class="size-select">
+          <option value="small">Small — up to 15 lbs</option>
+          <option value="medium" selected>Medium — 16–40 lbs</option>
+          <option value="large">Large — 41–70 lbs</option>
+          <option value="giant">Giant — 71 lbs +</option>
+        </select>
+      </div>
+
+      <div class="control-block search-block">
+        <label for="service-search" class="control-label">Search services</label>
+        <input
+          type="search"
+          id="service-search"
+          class="search-input"
+          placeholder="e.g. de-shed, nail trim, pawdicure…"
+          autocomplete="off"
+          aria-describedby="search-hint"
+        />
+        <span id="search-hint" class="hint">Search updates the ledger instantly.</span>
+      </div>
+    </section>
+
+    <!-- Category Tabs -->
+    <div class="tabs" role="tablist" aria-label="Service categories">
+      <button class="tab" role="tab" id="tab-all" aria-controls="panel-services" aria-selected="true" data-category="all">All Services</button>
+      <button class="tab" role="tab" id="tab-dog" aria-controls="panel-services" aria-selected="false" tabindex="-1" data-category="dog">Dog Grooming</button>
+      <button class="tab" role="tab" id="tab-cat" aria-controls="panel-services" aria-selected="false" tabindex="-1" data-category="cat">Cat Grooming</button>
+      <button class="tab" role="tab" id="tab-addon" aria-controls="panel-services" aria-selected="false" tabindex="-1" data-category="addon">Spa &amp; Add-ons</button>
+    </div>
+
+    <!-- ===================== LEDGER + QUOTE LAYOUT ===================== -->
+    <div class="ledger-layout">
+
+      <section
+        id="panel-services"
+        class="panel-services"
+        role="tabpanel"
+        aria-labelledby="tab-all"
+        aria-live="polite"
+        aria-busy="false"
+      >
+        <div id="services-status" class="sr-only" role="status" aria-live="polite"></div>
+        <div id="services-grid" class="services-grid"></div>
+      </section>
+
+      <aside class="quote-panel" aria-labelledby="quote-heading">
+        <h2 id="quote-heading">Client Quote</h2>
+        <p class="quote-sub">Items added from the ledger appear here.</p>
+
+        <ul id="quote-list" class="quote-list" aria-live="polite"></ul>
+
+        <div class="quote-total-row">
+          <span>Subtotal</span>
+          <span id="quote-total" aria-live="polite">$0.00</span>
+        </div>
+        <button id="clear-quote" class="btn btn-ghost" type="button">Clear quote</button>
+      </aside>
+
+    </div>
+
+    <!-- ===================== INQUIRY FORM ===================== -->
+    <section class="inquiry" aria-labelledby="inquiry-heading">
+      <h2 id="inquiry-heading">Save this quote to a client file</h2>
+      <p class="intro-copy">Fill in the client's details to attach the current quote to their record.</p>
+
+      <form id="inquiry-form" novalidate>
+        <div class="form-grid">
+
+          <div class="field">
+            <label for="client-name">Client name <span aria-hidden="true">*</span></label>
+            <input type="text" id="client-name" name="clientName" required aria-describedby="err-client-name" />
+            <p class="field-error" id="err-client-name" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="pet-name">Pet name <span aria-hidden="true">*</span></label>
+            <input type="text" id="pet-name" name="petName" required aria-describedby="err-pet-name" />
+            <p class="field-error" id="err-pet-name" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="contact-info">Phone or email <span aria-hidden="true">*</span></label>
+            <input type="text" id="contact-info" name="contact" required aria-describedby="err-contact-info" placeholder="e.g. (555) 123-4567" />
+            <p class="field-error" id="err-contact-info" role="alert"></p>
+          </div>
+
+          <div class="field field-wide">
+            <label for="notes">Notes for the groomer</label>
+            <textarea id="notes" name="notes" rows="3" aria-describedby="err-notes"></textarea>
+            <p class="field-error" id="err-notes" role="alert"></p>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="submit-inquiry">Save quote to client file</button>
+          <span id="form-status" class="form-status" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+
+      <div id="confirmation-card" class="confirmation-card" hidden></div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>The Gilded Paw · Internal staff tool · Rates subject to change without notice.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
